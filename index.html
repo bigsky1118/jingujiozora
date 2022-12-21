@@ -4,9 +4,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2.1/sdk.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <title>お名前登録</title>
+    <title>神宮寺大空</title>
 </head>
-<style>
+<!-- <style>
     body{
         padding: 1em 3em;
         margin: 0 auto;
@@ -27,9 +27,10 @@
     dd{
         margin: 0;
     }
-</style>
+</style> -->
+
 <body>
-    <form name="userinfo">
+    <!-- <form name="userinfo">
         <div id="inputform">
             <h2>ニックネームの登録お願いします</h2>
             <dl>
@@ -60,7 +61,7 @@
                 </dd>
             </dl>
         </div>
-    </form>
+    </form> -->
 
     <script>
 
@@ -71,31 +72,31 @@
             console.log('LIFF Initialization failed ', err);
         });
 
-        function sendText(text) {
-            liff.sendMessages([{
-                'type': 'text',
-                'text': text
-            }]).then(function () {
-                liff.closeWindow();
-            }).catch(function (error) {
-                window.alert('Failed to send message ' + error);
-            });
-        }
+        // function sendText(text) {
+        //     liff.sendMessages([{
+        //         'type': 'text',
+        //         'text': text
+        //     }]).then(function () {
+        //         liff.closeWindow();
+        //     }).catch(function (error) {
+        //         window.alert('Failed to send message ' + error);
+        //     });
+        // }
 
-        function submitBtn(){
-            const params = document.forms.userinfo;
-            const nickname = params.nickname.value;
-            const lastname_jp = params.lastname_jp.value;
-            const firstname_jp = params.firstname_jp.value;
-            const lastname_en = params.lastname_en.value;
-            const firstname_en = params.firstname_en.value;
-            const text  = `☆お名前登録☆\n\n`
-                        + `☆ニックネーム\n☆${nickname}さん\n\n`
-                        + `お名前\n☆${lastname_jp} ${firstname_jp}さん\n\n`
-                        + `お名前\n☆${lastname_en} ${firstname_en}\n\n`
-                        + `ご登録ありがとうございます！！`;
-            sendText(text);
-        }
+        // function submitBtn(){
+        //     const params = document.forms.userinfo;
+        //     const nickname = params.nickname.value;
+        //     const lastname_jp = params.lastname_jp.value;
+        //     const firstname_jp = params.firstname_jp.value;
+        //     const lastname_en = params.lastname_en.value;
+        //     const firstname_en = params.firstname_en.value;
+        //     const text  = `☆お名前登録☆\n\n`
+        //                 + `☆ニックネーム\n★${nickname}さん\n\n`
+        //                 + `☆お名前\n★${lastname_jp} ${firstname_jp}さん\n\n`
+        //                 + `☆Name\n☆${lastname_en} ${firstname_en}\n\n`
+        //                 + `ご登録ありがとうございます！！`;
+        //     sendText(text);
+        // }
 
     </script>
 
