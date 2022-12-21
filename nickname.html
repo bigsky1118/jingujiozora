@@ -48,100 +48,69 @@
                 <dt></dt>
                 <dd>
                     <input type="submit" value="確定">
+                    <input type="hidden" name="" id="userId" value="">
                 </dd>
             </dl>
         </div>
     </form>
 
     <script>
-        console.log('yes');
         window.onload = () =>{
             const params = new URLSearchParams(window.location.search);
-            console.log(params);
-            console.log('params');
             if(params.has('name')){
                 document.querySelector('#displayName').textContent = params.get('name');
             }
+            if(params.has('userId')){
+                document.querySelector('#userId').value = params.get('uerId');
+            }
         }
+
         const form = document.forms.userinfo;
         form.addEventListener('submit',(event)=>{
-            console.log(event);
             event.stopPropagation();
             event.preventDefault();
-            // const formData = new formData(form);
-            const payload = new URLSearchParams();
-            payload.append('name','だいすけ');
+            const url = new URL('https://script.google.com/macros/s/AKfycbzVUdarsMgPSsxJty3mGyu0kdgtXrcKrnC8uxGQ1UIGbF9Z-TtV9Ar_NQ4eGc2zZ1PV/exec');
+            url.searchParams.append('nickname',form.nickname.value);
             const options = {
                 'method'    : 'POST',
                 'mode'      : 'no-cors',
-                // 'headers'   : {
-                //     'Accept'        : 'application/json',
-                //     'Content-Type'  : 'application/x-www-form-urlencoded',
-                // },
-                // 'payload'   : JSON.stringify(payload),
             }
-            const url = 'https://script.google.com/macros/s/AKfycbzVUdarsMgPSsxJty3mGyu0kdgtXrcKrnC8uxGQ1UIGbF9Z-TtV9Ar_NQ4eGc2zZ1PV/exec?name=daisuke';
+            console.log(url.href);
             fetch(url, options);
+            liff.closeWindow();
             return false;
         })
-        // document.forms.userinfo.addEventListener()
-        // const userName = {
-        //     displayName : null,
-        //     presentName : null,
-        // };
-
-        // liff.init({
-        //     liffId: "1657424513-jeKPk4Qq",      // Use own liffId
-        //     withLoginOnExternalBrowser: true,   // Enable automatic login process
-
-        // }).then(() => {
-        //     const idToken = liff.getIDToken();
-        //     if(idToken){
-        //         const options = {
-        //             "method"    : "POST",
-        //             "headers"   : {
-        //                 "Content-Type": "application/x-www-form-urlencoded",
-        //             },
-        //             "body"      : encodeURI("id_token="+idToken+"&client_id=1657424513"),
-        //         };
-        //         fetch("https://api.line.me/oauth2/v2.1/verify",options)
-        //         .then(res=>{
-        //             return res.json();
-        //         })
-        //         .then(json=>{
-        //             const userId = json.sub;
-        //             const idCheck = liff.getDecodedIDToken().sub;
-        //                 if(userId==idCheck){
-        //                     document.querySelector("#userId").value = userId;
-        //                     document.querySelector(".userName").textContent = json.name+"さん、";
-        //                 }
-        //             })
-        //             .catch(err =>{
-        //                 console.log(err);
-        //             });
-        //     }
-        // }).catch((err) => {
-        //     console.log('LIFF Initialization failed ', err);
-        // });
-
-        function sendText(text) {
-            liff.sendMessages([{
-                'type': 'text',
-                'text': text
-            }]).then(function () {
-                liff.closeWindow();
-            }).catch(function (error) {
-                window.alert('Failed to send message ' + error);
-            });
-        }
-        
-
-        function submitBtn(){
-            const value = document.forms.userinfo.nickname.value;
-            const text  = `☆ニックネーム登録☆\n\n`
-                        + `☆ニックネーム\n★${nickname}`;
-            sendText(text);
-        }
+        liff.init({
+            liffId: "1657424513-jeKPk4Qq",      // Use own liffId
+        }).then(() => {
+            // const idToken = liff.getIDToken();
+            // if(idToken){
+            //     const options = {
+            //         "method"    : "POST",
+            //         "headers"   : {
+            //             "Content-Type": "application/x-www-form-urlencoded",
+            //         },
+            //         "body"      : encodeURI("id_token="+idToken+"&client_id=1657424513"),
+            //     };
+            //     fetch("https://api.line.me/oauth2/v2.1/verify",options)
+            //     .then(res=>{
+            //         return res.json();
+            //     })
+            //     .then(json=>{
+            //         const userId = json.sub;
+            //         const idCheck = liff.getDecodedIDToken().sub;
+            //             if(userId==idCheck){
+            //                 document.querySelector("#userId").value = userId;
+            //                 document.querySelector(".userName").textContent = json.name+"さん、";
+            //             }
+            //         })
+            //         .catch(err =>{
+            //             console.log(err);
+            //         });
+            // }
+        }).catch((err) => {
+            console.log('LIFF Initialization failed ', err);
+        });
 
     </script>
 
