@@ -69,10 +69,17 @@
             event.stopPropagation();
             event.preventDefault();
             // const formData = new formData(form);
+            const payload = new URLSearchParams();
+            payload.append('name','だいすけ');
             const options = {
-                method: 'POST',
+                'method'    : 'POST',
+                'headers'   : {
+                    'Accept'        : 'application/json',
+                    'Content-Type'  : 'application/x-www-form-urlencoded',
+                },
+                'payload'   : JSON.stringify(payload),
             }
-            const url = 'https://script.google.com/macros/s/AKfycbzVUdarsMgPSsxJty3mGyu0kdgtXrcKrnC8uxGQ1UIGbF9Z-TtV9Ar_NQ4eGc2zZ1PV/exec?name=ddd';
+            const url = 'https://script.google.com/macros/s/AKfycbzVUdarsMgPSsxJty3mGyu0kdgtXrcKrnC8uxGQ1UIGbF9Z-TtV9Ar_NQ4eGc2zZ1PV/exec';
             fetch(url, options);
             return false;
         })
