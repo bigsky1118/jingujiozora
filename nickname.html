@@ -71,6 +71,7 @@
             event.preventDefault();
             const url = new URL('https://script.google.com/macros/s/AKfycbzVUdarsMgPSsxJty3mGyu0kdgtXrcKrnC8uxGQ1UIGbF9Z-TtV9Ar_NQ4eGc2zZ1PV/exec');
             url.searchParams.append('nickname',form.nickname.value);
+            url.searchParams.append('userId',form.userId.value);
             const options = {
                 'method'    : 'POST',
                 'mode'      : 'no-cors',
