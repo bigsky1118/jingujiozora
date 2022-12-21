@@ -33,7 +33,7 @@
     }
 </style>
 <body>
-    <form name="userinfo" id="userinfo">
+    <form name="userinfo" action="https://script.google.com/macros/s/AKfycbzVUdarsMgPSsxJty3mGyu0kdgtXrcKrnC8uxGQ1UIGbF9Z-TtV9Ar_NQ4eGc2zZ1PV/exec" method="POST" id="userinfo">
         <div id="inputform">
             <h2>ニックネームを変更します</h2>
             <dl>
@@ -57,6 +57,15 @@
         const  form = document.querySelector('#userinfo');
         form.addEventListener('submit',(e)=>{
             console.log(e);
+            event.stopPropagation();
+            event.preventDefault();
+            const formData = new formData(form);
+            const options = {
+                method: 'POST',
+                body: formData,
+            }
+            const url = form.getAttribute('action');
+            fetch(url, options);
             return false;
         })
         // document.forms.userinfo.addEventListener()
