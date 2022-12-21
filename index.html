@@ -84,11 +84,11 @@
 
         function submitBtn(){
             const params = document.forms.userinfo;
-            const nickname = params.nickname;
-            const lastname_jp = params.lastname_jp;
-            const firstname_jp = params.firstname_jp;
-            const lastname_en = params.lastname_en;
-            const firstname_en = params.firstname_en;
+            const nickname = params.nickname.value;
+            const lastname_jp = params.lastname_jp.value;
+            const firstname_jp = params.firstname_jp.value;
+            const lastname_en = params.lastname_en.value;
+            const firstname_en = params.firstname_en.value;
             const text  = `☆お名前登録☆\n\n`
                         + `☆ニックネーム\n☆${nickname}さん\n\n`
                         + `お名前\n☆${lastname_jp} ${firstname_jp}さん\n\n`
