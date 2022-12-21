@@ -38,7 +38,7 @@
             <h2>ニックネームを変更します</h2>
             <dl>
                 <dt>現在のニックネーム</dt>
-                <dd><span id="displayName"></span></dd>
+                <dd id="displayName">no name</dd>
             </dl>
             <dl>
                 <dt>ニックネーム入力</dt>
@@ -54,8 +54,14 @@
     </form>
 
     <script>
-        const  form = document.querySelector('#userinfo');
-        form.addEventListener('submit',(e)=>{
+        window.onload = () =>{
+            const params = new URLSearchParams(window.location.search);
+            if(params.name){
+                document.querySelector('#displayName').textContent = params.name;
+            }
+        }
+        const form = document.forms.userinfo;
+        form.addEventListener('submit',(event)=>{
             console.log(e);
             event.stopPropagation();
             event.preventDefault();
