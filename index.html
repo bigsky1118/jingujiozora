@@ -4,15 +4,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2.1/sdk.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <title>名簿登録</title>
+    <title>お名前登録</title>
 </head>
-<style>
+<!-- <style>
     body{
         padding: 1em 3em;
         margin: 0 auto;
     }
-    li{
-        list-style: none;
+    h2{
+        font-size: 14px;
     }
     dl{
         display: flex;
@@ -22,77 +22,55 @@
         margin-bottom: 1em;
     }
     dt{
-        width: 5em;
+        width: 100%;
     }
     dd{
         margin: 0;
     }
-</style>
+</style> -->
 <body>
-    <form>
-        <h2>名簿登録</h2>
+    <!-- <form name="userinfo">
         <div id="inputform">
+            <h2>ニックネームの登録お願いします</h2>
+            <dl>
+                <dt>ニックネーム</dt>
+                <dd><input type="text" name="nickname" required></dd>
+            </dl>
+            <h2>お名前の登録もお願いします</h2>
             <dl>
                 <dt>姓</dt>
-                <dd><input type="text" name="lastname" required></dd>
+                <dd><input type="text" name="lastname_jp" required></dd>
             </dl>
             <dl>
                 <dt>名</dt>
-                <dd><input type="text" name="firstname" required></dd>
+                <dd><input type="text" name="firstname_jp" required></dd>
             </dl>
             <dl>
-                <dt>旧姓</dt>
-                <dd><input type="text" name="pastname"></dd>
+                <dt>Last Name</dt>
+                <dd><input type="text" name="lastname_en" required></dd>
             </dl>
             <dl>
-                <dt>卒業組</dt>
-                <dd>
-                    <select name="graduate" id="" required>
-                        <option value="1">1組 厚見学級</option>
-                        <option value="2">2組 宮本学級</option>
-                        <option value="1">3組 田村学級</option>
-                        <option value="1">4組 浅野学級</option>
-                        <option value="5">その他</option>
-                    </select>
-                </dd>
-            </dl>
-            <dl>
-                <dt>電話番号</dt>
-                <dd>
-                    <input type="tel" name="tel" id="">
-                </dd>
-            </dl>
-            <dl>
-                <dt>メール</dt>
-                <dd>
-                    <input type="email" name="email" id="">
-                </dd>
+                <dt>First Name</dt>
+                <dd><input type="text" name="firstname_en" required></dd>
             </dl>
             <dl>
                 <dt></dt>
                 <dd>
-                    <input type="submit" class="" value="送信">
+                    <button type="button" id="submit" onclick="submit">送信</button>
                 </dd>
             </dl>
         </div>
-    </form>
+    </form> -->
 
-    <script>
+    <!-- <script>
 
-        $(document).ready(function () {
-            const liffId = "1657466094-xyG8jZWY";
-            initializeLiff(liffId);
-        })
-
-        function initializeLiff(liffId) {
-            liff.init({
-                liffId: liffId
-            }).then(() => {
-                initializeApp();
-            }).catch((err) => {
-                console.log('LIFF Initialization failed ', err);
-            });
-        }
+        liff.init({
+            liffId: "1657424513-jeKPk4Qq"
+        }).then(() => {
+            initializeApp();
+        }).catch((err) => {
+            console.log('LIFF Initialization failed ', err);
+        });
 
         function sendText(text) {
             liff.sendMessages([{
@@ -105,24 +83,22 @@
             });
         }
 
-        const params = (new URL(document.location)).searchParams;
-        const key = params.get('key');
+        function submit(){
+            const params = document.forms.userinfo;
+            const nickname = params.nickname;
+            const lastname_jp = params.lastname_jp;
+            const firstname_jp = params.firstname_jp;
+            const lastname_en = params.lastname_en;
+            const firstname_en = params.firstname_en;
+            const text  = `☆お名前登録☆\n\n`
+                        + `☆ニックネーム\n☆${nickname}さん\n\n`
+                        + `お名前\n☆${lastname_jp} ${firstname_jp}さん\n\n`
+                        + `お名前\n☆${lastname_en} ${firstname_en}\n\n`
+                        + `ご登録ありがとうございます！！`;
+            sendText(text);
+        }
 
-        $(function () {
-            $('form').submit(function () {
-                const lastname  = $('input[name="lastname"]').val();
-                const firstname = $('input[name="firstname"]').val();
-                const pastname  = $('input[name="pastname"]').val();
-                const graduate  = $('select[name="graduate"]').val();
-                const tel       = $('input[name="tel"]').val();
-                const email     = $('input[name="email"]').val();
-                const msg = `名簿登録\n${lastname}\n${firstname}\n${pastname}\n${tel}\n${email}`;
-                sendText(msg);
-                return false;
-            });
-        });
-
-    </script>
+    </script> -->
 
 </body>
 </html>
