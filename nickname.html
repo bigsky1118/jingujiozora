@@ -59,8 +59,8 @@
             const params = new URLSearchParams(window.location.search);
             console.log(params);
             console.log('params');
-            if(params.name){
-                document.querySelector('#displayName').textContent = params.name;
+            if(params.has('name')){
+                document.querySelector('#displayName').textContent = params.get('name');
             }
         }
         const form = document.forms.userinfo;
@@ -68,7 +68,7 @@
             console.log(event);
             event.stopPropagation();
             event.preventDefault();
-            const formData = new formData(form);
+            // const formData = new formData(form);
             const options = {
                 method: 'POST',
             }
