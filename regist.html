@@ -39,6 +39,7 @@
 <body>
     <form name="regist" action="" method="POST" id="regist">
         <div id="inputform">
+
             <section id="nickname" class="hide">
                 <h2>ニックネームを変更します</h2>
                 <dl>
@@ -47,34 +48,45 @@
                 </dl>
                 <dl>
                     <dt>ニックネーム入力</dt>
-                    <dd><input type="text" name="nickname" required></dd>
+                    <dd><input type="text" name="nickname" maxlength="30" required></dd>
                 </dl>
             </section>
             <section id="names" class="hide">
                 <h2>お名前を登録します</h2>
                 <dl>
                     <dt>姓</dt>
-                    <dd><input type="text" name="lastname_jp" required></dd>
+                    <dd><input type="text" name="lastname_jp" maxlength="50" required></dd>
                 </dl>
                 <dl>
                     <dt>名</dt>
-                    <dd><input type="text" name="firstname_jp" required></dd>
+                    <dd><input type="text" name="firstname_jp" maxlength="50" required></dd>
                 </dl>
                 <dl>
                     <dt>姓（ローマ字）</dt>
-                    <dd><input type="text" name="lastname_en" required></dd>
+                    <dd><input type="text" name="lastname_en" maxlength="50" required></dd>
                 </dl>
                 <dl>
                     <dt>名（ローマ字）</dt>
-                    <dd><input type="text" name="firstname_en" required></dd>
+                    <dd><input type="text" name="firstname_en" maxlength="50" required></dd>
                 </dl>
                 <dl>
                     <dt>旧姓※あれば</dt>
-                    <dd><input type="text" name="pastname_jp"></dd>
+                    <dd><input type="text" name="pastname_jp" maxlength="50"></dd>
                 </dl>
                 <dl>
                     <dt>旧姓（ローマ字）※あれば</dt>
-                    <dd><input type="text" name="pastname_en"></dd>
+                    <dd><input type="text" name="pastname_en" maxlength="50"></dd>
+                </dl>
+            </section>
+            <section id="birth_place" class="hide">
+                <h2>出生地を登録します</h2>
+                <dl>
+                    <dt>出生地</dt>
+                    <dd>
+                        <select name="birth_place" id="birth_place">
+
+                        </select>
+                    </dd>
                 </dl>
             </section>
             <section id="submit">
@@ -82,7 +94,7 @@
                     <dt></dt>
                     <dd>
                         <input type="submit" name="submit" value="確定">
-                        <input type="hidden" name="section" id="app" value="liff">
+                        <input type="hidden" name="type" id="type" value="liff">
                         <input type="hidden" name="section" id="section" value="">
                         <input type="hidden" name="userId" id="userId" value="">
                     </dd>
@@ -92,12 +104,15 @@
     </form>
 
     <script>
+        const form = document.forms.regist;
+        
         window.onload = () =>{
             const params = new URLSearchParams(window.location.search);
             if(params.has('section')){
                 const section = params.get('section');
-                document.getElementById(section).classList.remove('hide');
                 document.querySelector('#section').value = section;
+                document.querySelector(`#${section}`).classList.remove('hide');
+                document.querySelectorAll(`section:not(#${section},#submit)`).forEach(section=>section.remove());
             }
             if(params.has('name')){
                 document.querySelector('.displayName').textContent = params.get('name');
@@ -106,33 +121,40 @@
                 document.querySelector('#userId').value = params.get('userId');
             }
         }
-
-        const form = document.forms.userinfo;
+        
         form.addEventListener('submit',(event)=>{
             event.stopPropagation();
             event.preventDefault();
-            if(liff.isInClient()){
+            if(liff.isInClient() && liff.isLoggedIn()){
                 const section = form.section.value;
-            
-                const name_jp = `${form.lastname_jp.value} ${form.firstname_jp.value}`;
-                const name_en = `${form.lastname_en.value} ${form.firstname_en.value}`;
-                try{
-                    liff.sendMessages([
-                        {
-                            'type' : `text`,
-                            'text' : `\n☆☆☆ 自動送信 ☆☆☆\nお名前登録\n\n${name_jp}\n${name_en}\n☆☆☆ 自動送信 ☆☆☆\n`,
-                        }
-                    ])
-                }catch(error){
+                let title='',text='';
+                if(section=="nickname"){
+                    title   = 'ニックネーム登録';
+                    text    = form.nickname.value;
                 }
+                if(section=="names"){
+                    title   = 'お名前登録';
+                    text    = form.lastname_jp.value   +'\n'
+                            + form.firstname_jp.value  +'\n'
+                            + form.lastname_en.value   +'\n'
+                            + form.firstname_en.value  +'\n'
+                            + form.pastname_jp.value   +'\n'
+                            + form.pastname_en.value;
+                }
+                liff.sendMessages([
+                    {
+                        'type' : `text`,
+                        'text' : `\n☆☆☆ 自動送信 ☆☆☆${title}\n\n${text}\n☆☆☆ 自動送信 ☆☆☆\n`,
+                    }
+                ])
                 liff.closeWindow();
             }
-            if(!liff.isInClient()){
+            if(!liff.isInClient() || !liff.isLoggedIn()){
                 const url = new URL('https://script.google.com/macros/s/AKfycbzVUdarsMgPSsxJty3mGyu0kdgtXrcKrnC8uxGQ1UIGbF9Z-TtV9Ar_NQ4eGc2zZ1PV/exec');
                 Object.keys(form).forEach(num=>{
                     const name = form[num].name;
                     const value = form[num].value;
-                    if(name=='submit'){
+                    if(name=='submit' || !value){
                         return false;
                     }
                     url.searchParams.append(name,value);
