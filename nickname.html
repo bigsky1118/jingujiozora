@@ -70,41 +70,40 @@
         form.addEventListener('submit',(event)=>{
             event.stopPropagation();
             event.preventDefault();
-            const url = new URL('https://script.google.com/macros/s/AKfycbzVUdarsMgPSsxJty3mGyu0kdgtXrcKrnC8uxGQ1UIGbF9Z-TtV9Ar_NQ4eGc2zZ1PV/exec');
-            let nickname = '';
-            Object.keys(form).forEach(num=>{
-                const name = form[num].name;
-                const value = form[num].value;
-                if(name=='submit'){
-                    return false;
+            if(liff.isInClient()){
+                const nickname = form.nickname.value;
+                try{
+                    liff.sendMessages([
+                        {
+                            'type' : `text`,
+                            'text' : `**************\n自動送信\n**************\nニックネーム登録\n--------------\n${nickname}\n--------------`,
+                        }
+                    ])
+                }catch(error){
                 }
-                if(name=='nickname'){
-                    nickname = value;
-                }
-                url.searchParams.append(name,value);
-            });
-            const options = {
-                'method'    : 'POST',
-                'mode'      : 'no-cors',
-            }
-            console.log(url.href);
-            
-            fetch(url, options);
-            try{
-                liff.sendMessages([
-                    {
-                        'type' : `text`,
-                        'text' : `ニックネーム登録\n${nickname}\n*********\n自動送信\n*********`,
-                    }
-                ])
-            }catch(error){
-            }
-            try{
                 liff.closeWindow();
-            }catch(error){
+            }
+            if(!liff.isInClient()){
+                const url = new URL('https://script.google.com/macros/s/AKfycbzVUdarsMgPSsxJty3mGyu0kdgtXrcKrnC8uxGQ1UIGbF9Z-TtV9Ar_NQ4eGc2zZ1PV/exec');
+                Object.keys(form).forEach(num=>{
+                    const name = form[num].name;
+                    const value = form[num].value;
+                    if(name=='submit'){
+                        return false;
+                    }
+                    url.searchParams.append(name,value);
+                });
+                const options = {
+                    'method'    : 'POST',
+                    'mode'      : 'no-cors',
+                }
+                console.log(url.href);
+                fetch(url, options);
+                window.close();
             }
             return false;
         })
+        
         liff.init({
             liffId: "1657424513-jeKPk4Qq",      // Use own liffId
         }).then(() => {
