@@ -143,6 +143,10 @@
                             + form.pastname_jp.value   +'\n'
                             + form.pastname_en.value;
                 }
+                if(section=="birth_place"){
+                    title   = '出生地登録';
+                    text    = form.birth_place.value;
+                }
                 liff.sendMessages([
                     {
                         'type' : `text`,
