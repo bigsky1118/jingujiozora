@@ -171,8 +171,8 @@
                     'mode'      : 'no-cors',
                 }
                 console.log(url.href);
-                fetch(url, options);
-                window.close();
+                fetch(url.href, options);
+                // window.close();
             }
             return false;
         })
