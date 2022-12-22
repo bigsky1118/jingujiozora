@@ -17,19 +17,28 @@
         font-size: 14px;
         text-align: center;
     }
+    h3{
+        font-size: 12px;
+        text-align: center;
+    }
+    p{
+        text-align: center;
+    }
     dl{
         display: flex;
-        flex-direction: column;
         justify-content: center;
         align-items: center;
         margin-bottom: 1em;
     }
     dt{
+        min-width: 6em;
         text-align: center;
-        width: 100%;
     }
     dd{
         margin: 0;
+    }
+    input, select{
+        font-size: 14px;
     }
     .hide{
         display: none;
@@ -44,39 +53,34 @@
             </section>
             <section id="nickname" class="hide">
                 <h2>ニックネームを変更します</h2>
-                <dl>
-                    <dt>現在のニックネーム</dt>
-                    <dd><span class="displayName">no name</span></dd>
-                </dl>
-                <dl>
-                    <dt>ニックネーム入力</dt>
-                    <dd><input type="text" name="nickname" maxlength="30" required></dd>
-                </dl>
+                <h3>現在のニックネーム</h3>
+                <p><span class="displayName">no name</span></p>
+                <p><input type="text" name="nickname" maxlength="30" required></p>
             </section>
             <section id="names" class="hide">
                 <h2>お名前を登録します</h2>
                 <dl>
                     <dt>姓</dt>
-                    <dd><input type="text" name="lastname_jp" maxlength="50" required></dd>
+                    <dd><input type="text" name="lastname_jp" maxlength="50" placeholder=" 必須" required></dd>
                 </dl>
                 <dl>
                     <dt>名</dt>
-                    <dd><input type="text" name="firstname_jp" maxlength="50" required></dd>
+                    <dd><input type="text" name="firstname_jp" maxlength="50" placeholder=" 必須" required></dd>
                 </dl>
                 <dl>
-                    <dt>姓（ローマ字）</dt>
-                    <dd><input type="text" name="lastname_en" maxlength="50" required></dd>
+                    <dt>姓<br>（ローマ字）</dt>
+                    <dd><input type="text" name="lastname_en" maxlength="50" placeholder=" 必須" required></dd>
                 </dl>
                 <dl>
-                    <dt>名（ローマ字）</dt>
-                    <dd><input type="text" name="firstname_en" maxlength="50" required></dd>
+                    <dt>名<br>（ローマ字）</dt>
+                    <dd><input type="text" name="firstname_en" maxlength="50" placeholder=" 必須" required></dd>
                 </dl>
                 <dl>
-                    <dt>旧姓※あれば</dt>
+                    <dt>旧姓</dt>
                     <dd><input type="text" name="pastname_jp" maxlength="50"></dd>
                 </dl>
                 <dl>
-                    <dt>旧姓（ローマ字）※あれば</dt>
+                    <dt>旧姓<br>（ローマ字）</dt>
                     <dd><input type="text" name="pastname_en" maxlength="50"></dd>
                 </dl>
             </section>
@@ -92,15 +96,12 @@
                 </dl>
             </section>
             <section id="submit">
-                <dl>
-                    <dt></dt>
-                    <dd>
-                        <input type="submit" name="submit" value="確定">
-                        <input type="hidden" name="type" id="type" value="liff">
-                        <input type="hidden" name="section" id="section" value="">
-                        <input type="hidden" name="userId" id="userId" value="">
-                    </dd>
-                </dl>
+                <p>
+                    <input type="submit" name="submit" value="確定">
+                    <input type="hidden" name="type" id="type" value="liff">
+                    <input type="hidden" name="section" id="section" value="">
+                    <input type="hidden" name="userId" id="userId" value="">
+                </p>
             </section>
         </div>
     </form>
