@@ -47,8 +47,9 @@
             <dl>
                 <dt></dt>
                 <dd>
-                    <input type="submit" value="確定">
-                    <input type="hidden" name="" id="userId" value="">
+                    <input type="submit" name="submit" value="確定">
+                    <input type="hidden" name="userId" id="userId" value="">
+                    <input type="hidden" name="section" id="section" value="liff">
                 </dd>
             </dl>
         </div>
@@ -70,15 +71,38 @@
             event.stopPropagation();
             event.preventDefault();
             const url = new URL('https://script.google.com/macros/s/AKfycbzVUdarsMgPSsxJty3mGyu0kdgtXrcKrnC8uxGQ1UIGbF9Z-TtV9Ar_NQ4eGc2zZ1PV/exec');
-            url.searchParams.append('nickname',form.nickname.value);
-            url.searchParams.append('userId',form.userId.value);
+            let nickname = '';
+            Object.keys(form).forEach(num=>{
+                const name = form[num].name;
+                const value = form[num].value;
+                if(name=='submit'){
+                    return false;
+                }
+                if(name=='nickname'){
+                    nickname = value;
+                }
+                url.searchParams.append(name,value);
+            });
             const options = {
                 'method'    : 'POST',
                 'mode'      : 'no-cors',
             }
             console.log(url.href);
+            
             fetch(url, options);
-            liff.closeWindow();
+            try{
+                liff.sendMessages([
+                    {
+                        'type' : `text`,
+                        'text' : `ニックネーム登録\n${nickname}\n*********\n自動送信\n*********`,
+                    }
+                ])
+            }catch(error){
+            }
+            try{
+                liff.closeWindow();
+            }catch(error){
+            }
             return false;
         })
         liff.init({
