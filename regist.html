@@ -69,11 +69,11 @@
                 </dl>
                 <dl>
                     <dt>姓<br>（ローマ字）</dt>
-                    <dd><input type="text" name="lastname_en" maxlength="50" placeholder=" 必須" required></dd>
+                    <dd><input type="text" name="lastname_en" maxlength="50" pattern="^[a-zA-Z]+$" placeholder=" 必須" required></dd>
                 </dl>
                 <dl>
                     <dt>名<br>（ローマ字）</dt>
-                    <dd><input type="text" name="firstname_en" maxlength="50" placeholder=" 必須" required></dd>
+                    <dd><input type="text" name="firstname_en" maxlength="50" pattern="^[a-zA-Z]+$" placeholder=" 必須" required></dd>
                 </dl>
                 <dl>
                     <dt>旧姓</dt>
@@ -81,7 +81,7 @@
                 </dl>
                 <dl>
                     <dt>旧姓<br>（ローマ字）</dt>
-                    <dd><input type="text" name="pastname_en" maxlength="50"></dd>
+                    <dd><input type="text" name="pastname_en" maxlength="50" pattern="^[a-zA-Z]+$"></dd>
                 </dl>
             </section>
             <section id="birth_place" class="hide">
