@@ -137,12 +137,12 @@
                 }
                 if(section=="names"){
                     title   = 'お名前登録';
-                    text    = form.lastname_jp.value   +'\n'
-                            + form.firstname_jp.value  +'\n'
-                            + form.lastname_en.value   +'\n'
-                            + form.firstname_en.value  +'\n'
-                            + form.pastname_jp.value   +'\n'
-                            + form.pastname_en.value;
+                    text    = form.lastname_jp.value.toUpperCase()   +'\n'
+                            + form.firstname_jp.value.toUpperCase()  +'\n'
+                            + form.lastname_en.value.toUpperCase()   +'\n'
+                            + form.firstname_en.value.toUpperCase()  +'\n'
+                            + form.pastname_jp.value.toUpperCase()   +'\n'
+                            + form.pastname_en.value.toUpperCase();
                 }
                 if(section=="birth_place"){
                     title   = '出生地登録';
