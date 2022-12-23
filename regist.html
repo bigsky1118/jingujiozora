@@ -111,17 +111,17 @@
         
         window.onload = () =>{
             const params = new URLSearchParams(window.location.search);
-            if(params.has('section')){
-                const section = params.get('section');
-                document.querySelector('#section').value = section;
-                document.querySelector(`#${section}`).classList.remove('hide');
-                document.querySelectorAll(`section:not(#${section},#submit)`).forEach(section=>section.remove());
-            }
             if(params.has('name')){
                 document.querySelector('.displayName').textContent = params.get('name');
             }
             if(params.has('userId')){
                 document.querySelector('#userId').value = params.get('userId');
+            }
+            if(params.has('section')){
+                const section = params.get('section');
+                document.querySelector('#section').value = section;
+                document.querySelector(`#${section}`).classList.remove('hide');
+                document.querySelectorAll(`section:not(#${section},#submit)`).forEach(section=>section.remove());
             }
         }
         
